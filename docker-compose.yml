@@ -1,0 +1,73 @@
+services:
+  app:
+    build:
+      dockerfile: ./docker/php/Dockerfile
+    container_name: multi-tenancy-quiz-management
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=multi_tenancy_quiz_management
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_PORT=3306
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx
+    container_name: nginx-webserver
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.webserver.rule=Host(`multi-tenancy-quiz-management.test`, `{subdomain:.+}.multi-tenancy-quiz-management.test`)"
+      - "traefik.http.services.webserver.loadbalancer.server.port=80"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=multi_tenancy_quiz_management
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - app-network
+
+  traefik:
+      image: traefik:v2.5
+      container_name: traefik
+      ports:
+        - "80:80"
+        - "8080:8080" # Traefik dashboard
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      command:
+        - "--api.insecure=true"
+        - "--providers.docker=true"
+        - "--entrypoints.web.address=:80"
+      networks:
+        - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local

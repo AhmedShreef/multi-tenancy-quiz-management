@@ -21,28 +21,28 @@ class TenantRequest extends FormRequest
      */
     public function rules(): array
     {
-       return [
-        'name' =>[
-             'required',
-             'string',
-             'max:255',
-        ],
-        'domain' => [
-             'required',
-             'string',
-             'max:255',
-             'unique:domains,domain'
-        ],
-        'email' => ['required'],
-        'password' => [
-            'required',
-            'string',
-            'min:8',
-            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
-            'confirmed',
-        ],
-        
-    ];
+        return [
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'domain' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:tenants,id',
+                'unique:domains,domain'
+            ],
+            'email' => ['required'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+                'confirmed',
+            ],
+        ];
     }
 
     public function messages()

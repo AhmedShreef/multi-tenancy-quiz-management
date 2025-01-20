@@ -19,7 +19,8 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
-        'multi-tenancy-quiz-management.test'
+        'multi-tenancy-quiz-management.test',
+        'multi-tenancy-quiz-management.live'
     ],
 
     /**

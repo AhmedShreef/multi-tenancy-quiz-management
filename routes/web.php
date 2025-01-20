@@ -18,7 +18,7 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('tenants.create');
 });
 
 // Central Database routes
