@@ -67,7 +67,7 @@ class TenantController extends Controller
                 'name'      => $request['name'],
                 'email'     => $request['email'],
                 'password'  => $request['password'],
-                'domain'    => 'http://' . $activeTenant->domains->first()->domain . '/admin'
+                'domain'    => 'https://' . $activeTenant->domains->first()->domain . '/admin'
             ]);
         }
     }

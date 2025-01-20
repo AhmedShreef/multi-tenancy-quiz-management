@@ -42,7 +42,7 @@
             <!-- Password -->
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="*******" required>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                 <div id="passwordError" class="text-danger mt-2 d-none"></div>
                 @error('password')
                 <div class="text-danger mt-2">{{ $message }}</div>
@@ -52,7 +52,7 @@
             <!--confirm  Password -->
             <div class="mb-3">
                 <label for="c_password" class="form-label">Confirm Password</label>
-                <input  type="password" id="c_password" name="password_confirmation" class="form-control" placeholder="*******" required>
+                <input  type="password" id="c_password" name="password_confirmation" class="form-control" placeholder="Password confirmation" required>
 
                 <div id="confirmPasswordError" class="text-danger mt-2 d-none"></div>
                 @error('password_confirmation')
