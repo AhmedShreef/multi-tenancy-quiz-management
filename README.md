@@ -1,3 +1,4 @@
+
 # Multi Tenancy Quiz Management Task
 
 
@@ -35,31 +36,41 @@ and wait for the docker images to be pulled, built and the containers to be up a
 
 #### 3. Install App Dependencies & Generate App Key
 ```bash
-docker-compose exec app cp .env.example .env
-docker-compose exec app composer install --no-dev
-docker-compose exec app php artisan key:generate
+docker-compose exec multi-tenancy-quiz-management cp .env.example .env
+docker-compose exec multi-tenancy-quiz-management composer install --no-dev
+docker-compose exec multi-tenancy-quiz-management php artisan key:generate
 ```
 These three commands will ensure composer dependencies are installed and the application key is generated if they fail to install via Dockerfile for any reason.
 
 #### 4. Run Database Migrations and Seeders
 ```bash
-docker-compose exec app php artisan migrate
+docker-compose exec multi-tenancy-quiz-management php artisan migrate
 ```
 This command will create the necessary tables for central database.
 
-#### 5. Test the App
+#### 5. Test the App (Locally)
 ##### Create New Client
 Once the setup is complete, open your browser and navigate to:
 ```bash
 http://multi-tenancy-quiz-management.test/tenants/create
 ```
-Fill in the form with client info and make sure to fill in a valid email so that you can recieve an email containing tenant dashboard url and admin login credentails.
+1. Fill in the form with client info and make sure to fill in a valid email so that you can recieve an email containing tenant dashboard url and admin login credentails.
+Now if you have a valid mail credentials configured on .env file you should recieve an email containing the dashboard link and admin user/password.
+
+2. You can proceed with creating members and creating quizzes and login by member to see and answer these quizzes and recieve an email with your score.
+
+#### 6. Test the App (Live)
+open your browser and navigate to:
+```bash
+https://multi-tenancy-quiz-management.live
+```
+Repeat the same steps under point 5
 
 ## Technologies Used
 
 - **PHP 8.1 or higher**
--   **Laravel 10**
--   **Laravel Filament** (for Dashboard)
+-   **Laravel 10.x**
+-   **Laravel Filament v3** (for Dashboard)
 -   **MySQL**
 -   **Docker** (with Docker Compose)
 
