@@ -56,7 +56,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-    'base_url'=>env('BASE_URL', 'multi-tenancy-quiz-management.live'),
+    'base_url'=>env('BASE_URL', 'multi-tenancy-quiz-management.test'),
 
     'asset_url' => env('ASSET_URL'),
 

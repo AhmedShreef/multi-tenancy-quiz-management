@@ -1,4 +1,5 @@
 
+
 # Multi Tenancy Quiz Management Task
 
 
@@ -48,7 +49,21 @@ docker-compose exec app php artisan migrate
 ```
 This command will create the necessary tables for central database.
 
-#### 5. Test the App (Locally)
+#### 5. Required configurations
+Since we use mailtrap as smtp mail provider, you need to add valid smtp credentials in .env file to be able to recieve registration/quizzes-score mails.
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+
+#### 6. Test the App (Locally)
 ##### Create New Client
 Once the setup is complete, open your browser and navigate to:
 ```bash
@@ -59,7 +74,7 @@ Now if you have a valid mail credentials configured on .env file you should reci
 
 2. You can proceed with creating members and creating quizzes and login by member to see and answer these quizzes and recieve an email with your score.
 
-#### 6. Test the App (Live)
+#### 7. Test the App (Live)
 open your browser and navigate to:
 ```bash
 https://multi-tenancy-quiz-management.live
