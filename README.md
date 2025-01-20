@@ -67,7 +67,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ##### Create New Client
 Once the setup is complete, open your browser and navigate to:
 ```bash
-http://multi-tenancy-quiz-management.test/tenants/create
+https://multi-tenancy-quiz-management.test/tenants/create
 ```
 1. Fill in the form with client info and make sure to fill in a valid email so that you can recieve an email containing tenant dashboard url and admin login credentails.
 Now if you have a valid mail credentials configured on .env file you should recieve an email containing the dashboard link and admin user/password.
